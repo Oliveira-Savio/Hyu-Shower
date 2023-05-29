@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <link rel="stylesheet" href="./css/style.css">
+    <!-- <script src="./js/script.js" defer></script> -->
+    
+    <title>Hyu's Shower</title>
+</head>
+<body>
+    
+    <div class="game-board">
+        <img src="./images/clouds.png" class="clouds">
+        <img src="./images/HYU.GIF" class="hyu">
+        <img src="./images/banheira.png" class="banheira">
+    </div>
+
+    <script>
+        const hyu = document.querySelector('.hyu');
+        const banheira = document.querySelector('.banheira');
+        
+        const jump = () => {
+            hyu.classList.add('jump');
+        
+            setTimeout(() => {
+        
+                hyu.classList.remove('jump');
+        
+            }, 500);
+        
+        } 
+        
+        const loop = setInterval(() => {
+
+            const banheiraPosition =  banheira.offsetLeft;
+            const hyuPosition = +window.getComputedStyle(hyu).bottom.replace('px', '');
+            
+            if (banheiraPosition <= 78 && banheiraPosition > 0 && hyuPosition < 70) {
+
+                banheira.style.animation = 'none';
+                banheira.style.left = `${banheiraPosition}px`;
+
+                hyu.style.animation = 'none';
+                hyu.style.bottom = `${hyuPosition}px`;
+
+                hyu.src = './images/game-over.png'
+
+                clearInterval(loop);
+
+            }
+
+        }, 10)
+
+        document.addEventListener('keydown', jump);
+        </script>
+
+</body>
+</html>
